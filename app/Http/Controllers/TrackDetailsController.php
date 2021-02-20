@@ -37,7 +37,7 @@ class TrackDetailsController extends Controller
      */
     public function show($id)
     {
-        $details = track::where('id', $id)->first();
+        $details = track::where('this_tracking_job_id', $id)->first();
         return $details;
     }
 

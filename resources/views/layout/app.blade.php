@@ -52,13 +52,56 @@
         <div
             class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color: #ffffff;">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('home') }}" style="color: #ffffff;">Home</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="color: #ffffff;">Search</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color: #ffffff;">Add</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<div class="container">
+    @if(Request::url() != url('/'))
+        <div class="row justify-content-center pt-2">
+            <a href="{{ Route('home') }}">
+                <button class="mb-2 mt-2 btn btn-danger"><- Return</button>
+            </a>
+        </div>
+    @endif
+    <div id="map"></div>
+    @if(Request::url() == url('/'))
+        <div class="row justify-content-center pt-2">
+            <a href="{{ Request::url() }}">
+                <button class="mb-5 btn btn-danger">Refresh</button>
+            </a>
+        </div>
+    @endif
+</div>
+<div class="container" style="border: 2px solid orangered; background-color: rgba(135,206,235,0.6); border-radius: 12px; color:white;">
+    <!---
+    <div class="row">
+        <div class="col">
+            <ol class="breadcrumb" style="background-color: rgb(255,255,255);">
+                <li class="breadcrumb-item"><a href="#"><span>Home</span></a></li>
+                <li class="breadcrumb-item"><a href="#"><span>Library</span></a></li>
+                <li class="breadcrumb-item"><a href="#"><span>Data</span></a></li>
+            </ol>
+        </div>
+    </div>
+    -->
+    <div class="row">
+        <div class="col">
+            <h4 style="color: rgba(33,37,41,0.69);"><br>{{ $current['PartitionKey'] }}<br><br></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4 style="color: rgba(33,37,41,0.7);">Status:&nbsp;<span style="color: rgba(255,0,0,0.7);">{{ $current['trip_status'] }}</span></h4>
+        </div>
+        <div class="col">
+            <h4 style="color: rgba(33,37,41,0.73);">{{ $current['PartitionKey'] }}</h4>
+        </div>
+    </div>
+</div>
 @yield('content')
 
 <script
